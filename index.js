@@ -30,8 +30,14 @@ app.get("/sensor-data", async (req, res) => {
     res.status(500).json({ success: false, message: "Error fetching data", error: error.message });
   }
 });
-
-// Start server
+app.get("/trigger-analysis", async (req, res) => {
+  try {
+    await set(ref(db, "/analyse"), true);
+    res.json({ message: "Analyse flag set to true" });
+  } catch (error) {
+    res.status(500).json({ error: "Error updating Firebase", details: error.message });
+  }
+});
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
