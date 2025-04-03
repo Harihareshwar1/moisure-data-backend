@@ -30,6 +30,16 @@ app.get("/sensor-data", async (req, res) => {
     res.status(500).json({ success: false, message: "Error fetching data", error: error.message });
   }
 });
+
+
+app.get('/analysis-value', async (req, res) => {
+  try {
+    const snapshot = await get(ref(db, "/analyse"));
+    
+    res.json({ message:snapshot.val() });
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching Firebase", details: error.message });
+  }});
 app.get("/trigger-analysis", async (req, res) => {
   try {
     await set(ref(db, "/analyse"), true);
