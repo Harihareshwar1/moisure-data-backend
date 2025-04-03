@@ -1,6 +1,6 @@
 import express from "express";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase, ref, get, set } from "firebase/database";
 import { configDotenv } from "dotenv";
 configDotenv()
 const app = express();
